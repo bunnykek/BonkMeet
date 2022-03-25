@@ -1,0 +1,33 @@
+{
+    "name": "BonkMeet",
+    "description": "A self hosted telegram bot for attending Google Meet sessions on bahalf of you.",
+    "repository": "https://github.com/bunnykek/BonkMeet",
+    "logo": "https://imgur.com/UsUog2Z.png",
+    "keywords": [
+        "telegram",
+        "telegram-bot",
+        "gmeet",
+        "google-meet",
+        "gmeet-bot",
+        "google-meet-bot",
+        "gmeet-telegram-bot"
+    ],
+    "env": {
+        "bot_token": {
+            "description": "Get your bot's token from https://telegram.me/BotFather ",
+            "value": "XXXXXXXXXX:YYYYYYYYYYYYYYYYYYYYYYYYY"
+        },
+        "cookie": {
+            "description": "cookie.json contents.",
+            "value": ""
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "jontewks/puppeteer"
+        },
+        {
+            "url": "heroku/nodejs"
+        }
+    ]
+}

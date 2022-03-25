@@ -1,0 +1,32 @@
+{
+  "name": "bonkmeet",
+  "version": "1.0.0",
+  "description": "A self hosted telegram bot for attending Google Meet in bahalf of you.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bunnykek/BonkMeet.git"
+  },
+  "keywords": [
+    "telegram",
+    "telegram-bot",
+    "gmeet",
+    "google-meet",
+    "gmeet-bot",
+    "google-meet-bot",
+    "gmeet-telegram-bot"
+  ],
+  "author": "bunny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bunnykek/BonkMeet/issues"
+  },
+  "homepage": "https://github.com/bunnykek/BonkMeet#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.56.0",
+    "puppeteer": "^13.5.1"
+  }
+}
