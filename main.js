@@ -24,7 +24,7 @@ async function main() {
   const browser = await puppeteer.launch({
     headless: true,
     ignoreDefaultArgs: ['--enable-automation'],
-    args: ['--start-maximized','--no-sandbox'],
+    args: ['--start-maximized'],
     defaultViewport: { width: 1920, height: 1080 }
   });
   const context = browser.defaultBrowserContext();
@@ -36,17 +36,23 @@ async function main() {
   // Create a bot that uses 'polling' to fetch new updates
   const bot = new TelegramBot(token, { polling: true });
 
-  bot.on("polling_error", console.log);
+  //bot.on("polling_error", console.log);
 
   // Matches "/echo [whatever]"
   bot.onText(/\/join (.+)/, async (msg, match) => {
     const chatId = msg.chat.id;
     const resp = match[1]; // the captured "whatever"
-    const classCode = resp.match(/\w+-\w+-\w+/)[0];
-    console.log('Classroom link : ', `https://meet.google.com/${classCode}`);
-    await page.goto(`https://meet.google.com/${classCode}`);
-    bot.sendMessage(chatId, 'Please wait...', { reply_to_message_id: msg.message_id })
-
+    let classCode = ''
+    try{
+      classCode = resp.match(/\w+-\w+-\w+/)[0];
+    } catch{
+      await bot.sendMessage(chatId, 'Check your meeting code.\nMake sure that you have used the correct meet url.', { reply_to_message_id: msg.message_id })
+      return null;
+    }
+      console.log('Classroom link : ', `https://meet.google.com/${classCode}`);
+      await page.goto(`https://meet.google.com/${classCode}`);
+      await bot.sendMessage(chatId, 'Please wait...', { reply_to_message_id: msg.message_id })
+      
     let [button] = await page.$x("//button[contains(., 'Dismiss')]");
     if (button) {
       await button.click();
@@ -54,7 +60,7 @@ async function main() {
 
     [button] = await page.$x("//button[contains(., 'Return to home screen')]");
     if (button) {
-      bot.sendMessage(chatId, 'Check your meeting code.\nMake sure that you have used the correct meet url.', { reply_to_message_id: msg.message_id })
+      await bot.sendMessage(chatId, 'Check your meeting code.\nMake sure that you have used the correct meet url.', { reply_to_message_id: msg.message_id })
     }
 
     else {
