@@ -1,7 +1,7 @@
 {
   "name": "bonkmeet",
   "version": "1.0.0",
-  "description": "A self hosted telegram bot for attending Google Meet in bahalf of you.",
+  "description": "A self hosted telegram bot for attending Google Meet on bahalf of you.",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
