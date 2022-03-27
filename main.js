@@ -24,7 +24,7 @@ async function main() {
   const browser = await puppeteer.launch({
     headless: true,
     ignoreDefaultArgs: ['--enable-automation'],
-    args: ['--start-maximized'],
+    args: ['--start-maximized','--no-sandbox'],
     defaultViewport: { width: 1920, height: 1080 }
   });
   const context = browser.defaultBrowserContext();
