@@ -68,6 +68,7 @@ async function main() {
     else {
       xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[1]/div[1]/div/div[4]/div[1]/div/div/div'
       await page.waitForXPath(xpath)
+      await page.waitForTimeout(3000)
       elements = await page.$x(xpath)
       await elements[0].click()
   
