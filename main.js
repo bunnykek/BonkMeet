@@ -28,7 +28,7 @@ async function main() {
     defaultViewport: { width: 1280 , height: 720 }
   });
   const context = browser.defaultBrowserContext();
-  await context.overridePermissions('https://meet.google.com', []);
+  await context.overridePermissions('https://meet.google.com', ['microphone','camera']);
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
   await page.setCookie(...Cookie);
@@ -57,6 +57,17 @@ async function main() {
     if (button) {
       await button.click();
     }
+    else {
+      xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[1]/div[1]/div/div[4]/div[1]/div/div/div'
+      await page.waitForXPath(xpath)
+      elements = await page.$x(xpath)
+      await elements[0].click()
+
+      xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[1]/div[1]/div/div[4]/div[2]/div/div'
+      await page.waitForXPath(xpath)
+      elements = await page.$x(xpath)
+      await elements[0].click()
+    }
 
     [button] = await page.$x("//button[contains(., 'Return to home screen')]");
     if (button) {
@@ -64,8 +75,6 @@ async function main() {
     }
 
     else {
-
-
       xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/span/span'
       await page.waitForXPath(xpath)
       await page.waitForTimeout(1000)
