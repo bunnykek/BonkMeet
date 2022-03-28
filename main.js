@@ -25,7 +25,7 @@ async function main() {
     headless: true,
     ignoreDefaultArgs: ['--enable-automation'],
     args: ['--start-maximized','--no-sandbox'],
-    defaultViewport: { width: 1920, height: 1080 }
+    defaultViewport: { width: 1280 , height: 720 }
   });
   const context = browser.defaultBrowserContext();
   await context.overridePermissions('https://meet.google.com', []);
