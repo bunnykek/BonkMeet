@@ -17,9 +17,13 @@
             "description": "Get your bot's token from https://telegram.me/BotFather ",
             "value": "XXXXXXXXXX:YYYYYYYYYYYYYYYYYYYYYYYYY"
         },
+        "user_id": {
+            "description": "Get your Telegram userID from https://telegram.me/userinfobot (@userinfobot)",
+            "value": "XXXXXXXXXX"
+        },
         "cookie": {
             "description": "cookie.json contents.",
-            "value": ""
+            "value": "[...]"
         }
     },
     "buildpacks": [

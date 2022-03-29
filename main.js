@@ -18,6 +18,7 @@ console.log('Send /help to the bot...');
 
 const token = process.env.bot_token;
 const Cookie = JSON.parse(process.env.cookie);
+const user_id = process.env.user_id;
 
 async function main() {
 
@@ -40,6 +41,10 @@ async function main() {
 
   // Matches "/echo [whatever]"
   bot.onText(/\/join (.+)/, async (msg, match) => {
+    if(msg.from.id != user_id) {
+      return null;
+    }
+
     if(restrict == 1) {
       return null;
     }
@@ -97,6 +102,9 @@ async function main() {
   });
 
   bot.on('message', async (msg) => {
+    if(msg.from.id != user_id) {
+      return null;
+    }
     const chatId = msg.chat.id;
     if (msg.text == '\/status') {
       console.log(msg.text);
