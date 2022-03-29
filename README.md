@@ -3,9 +3,10 @@
 Telegram bot to attend Google Meet sessions on behalf of you :D    
 
 ## How to use?
-You will need these two tokens:
+You will need these 3 tokens:
 1. Bot Token from [BotFather](https://telegram.me/BotFather)
-2. Go to meet.google.com and export the cookie using [Cookies for puppeteer chrome extension](https://chrome.google.com/webstore/detail/%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BCjson%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%87%BA%E5%8A%9B-for-puppet/nmckokihipjgplolmcmjakknndddifde)    
+2. Owner's telegram user ID from [userinfobot](https://telegram.me/userinfobot)
+3. Go to meet.google.com and export the cookie using [Cookies for puppeteer chrome extension](https://chrome.google.com/webstore/detail/%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BCjson%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%87%BA%E5%8A%9B-for-puppet/nmckokihipjgplolmcmjakknndddifde)    
 
 ### For VPS/RDP users:   
 First install node.js and set these two environment variables:
