@@ -13,6 +13,7 @@ First install node.js and set these two environment variables:
 ```
 bot_token="XXXXXXX:AAAAAAAAAAAAAAAAAAAAAAAa"  //bot token from botfather
 cookie =                                      //exported cookie
+user_id =                                     //Get your userID from https://telegram.me/userinfobot
 ```
 then clone this repo and move into its directory.   
 `npm install`     
