@@ -25,6 +25,8 @@ Make sure to go to the deployed application's `Resources` tab and disable the `w
     
 <img src="https://user-images.githubusercontent.com/67633271/159228071-af14ac62-b867-4271-83c8-1a075bf2bab7.png" width="1000">   
 
+Watch the video tutorial : https://www.youtube.com/watch?v=3C8BoCTkJQ0
+
 ### Bot commands:
 ```
 /join {gmeet_link}    
