@@ -14,6 +14,7 @@ First install node.js and set these two environment variables:
 bot_token="XXXXXXX:AAAAAAAAAAAAAAAAAAAAAAAa"  //bot token from botfather
 cookie =                                      //exported cookie
 user_id =                                     //Get your userID from https://telegram.me/userinfobot
+threshold = 10                                //Auto leaves the meet when the meet strength becomes less then threshold
 ```
 then clone this repo and move into its directory.   
 `npm install`     
@@ -29,8 +30,10 @@ Watch the video tutorial : https://www.youtube.com/watch?v=3C8BoCTkJQ0
 
 ### Bot commands:
 ```
-/join {gmeet_link}    
-/status (shows the ongoing meet current status)     
-/leave (leaves the current gmeet session)      
+/join {gmeet_link}
+/chatbox (toggle chatbox)
+/message {test message} (sends message to chatbox)
+/status (shows the ongoing meet current status)
+/leave (leaves the current gmeet session)
 /help
 ```
