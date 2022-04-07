@@ -19,6 +19,7 @@ console.log('Send /help to the bot...');
 const token = process.env.bot_token;
 const Cookie = JSON.parse(process.env.cookie);
 const user_id = process.env.user_id;
+const threshold = parseInt(process.env.threshold);
 
 async function main() {
 
@@ -39,7 +40,7 @@ async function main() {
       await page.waitForSelector('.uGOf1d')
       let element = await page.$('.uGOf1d')
       let value = await page.evaluate(el => el.textContent, element)
-      if (value < process.env.threshold) {
+      if (parseInt(value) < threshold) {
         await bot.sendMessage(user_id, 'Meet strength has become less than the threshold strength.');
         await bot.sendMessage(user_id, 'Leaving the meet...');
         let xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[2]/div/div[7]/span/button'
