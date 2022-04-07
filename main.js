@@ -25,14 +25,39 @@ async function main() {
   const browser = await puppeteer.launch({
     headless: true,
     ignoreDefaultArgs: ['--enable-automation'],
-    args: ['--start-maximized','--no-sandbox', '--disable-setuid-sandbox', '--use-fake-ui-for-media-stream'],
-    defaultViewport: { width: 1280, height: 720 }
+    args: ['--start-maximized','--no-sandbox', '--disable-setuid-sandbox', '--use-fake-ui-for-media-stream']
   });
 
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
   await page.setCookie(...Cookie);
+  await page.setViewport({ width: 1366, height: 768});
   let restrict = 0;
+
+  setInterval(async () => {
+    try {
+      await page.waitForSelector('.uGOf1d')
+      let element = await page.$('.uGOf1d')
+      let value = await page.evaluate(el => el.textContent, element)
+      if (value < process.env.threshold) {
+        await bot.sendMessage(user_id, 'Meet strength has become less than the threshold strength.');
+        await bot.sendMessage(user_id, 'Leaving the meet...');
+        let xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[2]/div/div[7]/span/button'
+        await page.waitForTimeout(1000)
+        let elements = await page.$x(xpath)
+        if (elements.length != 0) {
+          await elements[0].click()
+          console.log('meet left');
+          await page.waitForTimeout(2000)
+          await page.screenshot({ path: 'example.png' });
+          let stream = await fs.createReadStream('./example.png');
+          bot.sendPhoto(user_id, stream);
+        }
+      }
+    } catch {
+      return null;
+    }
+  },60000)
 
   // Create a bot that uses 'polling' to fetch new updates
   const bot = new TelegramBot(token, { polling: true });
@@ -60,7 +85,7 @@ async function main() {
       await bot.sendMessage(chatId, 'Check your meeting code.\nMake sure that you have used the correct meet url.', { reply_to_message_id: msg.message_id })
       return null;
     }
-      console.log('Classroom link : ', `https://meet.google.com/${classCode}`);
+      console.log('Meet link : ', `https://meet.google.com/${classCode}`);
       await page.goto(`https://meet.google.com/${classCode}`);
       await bot.sendMessage(chatId, 'Please wait...', { reply_to_message_id: msg.message_id })
     
@@ -101,6 +126,36 @@ async function main() {
     restrict = 0;
   });
 
+  bot.onText(/\/message (.+)/, async (msg, match) => {
+    if (msg.from.id != user_id) {
+      return null;
+    }
+
+    const chatId = msg.chat.id;
+    const resp = match[1];  // the captured "whatever"
+
+    try {
+      await page.type("#bfTqV", ' ', { delay: 200 });
+      await page.waitForTimeout(2000);
+      await page.keyboard.press('Backspace');
+      await page.type("#bfTqV", resp, { delay: 300 });
+     
+      xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div[2]/div[2]/div/div[5]/span/button';
+      await page.waitForXPath(xpath)
+      elements = await page.$x(xpath)
+      await elements[0].click()
+
+      //await page.keyboard.press('Enter');
+      await page.waitForTimeout(1000);
+      await page.screenshot({ path: 'example.png' });
+      let stream = await fs.createReadStream('./example.png');
+      bot.sendPhoto(chatId, stream);
+    }
+    catch {
+        bot.sendMessage(chatId, 'Send /chatbox first.', { reply_to_message_id: msg.message_id });
+      }
+  })
+
   bot.on('message', async (msg) => {
     if(msg.from.id != user_id) {
       return null;
@@ -131,9 +186,28 @@ async function main() {
       }
     }
 
+    else if(msg.text == '\/chatbox') {
+      console.log(msg.text);
+      let xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[3]/div[3]/div/div/div[3]/span/button'
+      await page.waitForTimeout(1000)
+      let elements = await page.$x(xpath)
+      if (elements.length != 0) {
+        await elements[0].click()
+        await page.waitForTimeout(1000)
+        await page.screenshot({ path: 'example.png' });
+        let stream = await fs.createReadStream('./example.png');
+        bot.sendPhoto(chatId, stream);
+      }
+      else{
+        bot.sendMessage(chatId,'/join a meet first.',{ reply_to_message_id: msg.message_id });
+      }
+    }
+
     else if (msg.text == '\/help') {
       let help = `List of available commands:
 /join {gmeet_link}
+/chatbox (toggle chatbox)
+/message {test message} (sends message to chatbox)
 /status (shows the ongoing meet current status)
 /leave (leaves the current gmeet session)
 /help`

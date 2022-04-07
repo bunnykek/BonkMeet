@@ -24,6 +24,10 @@
         "cookie": {
             "description": "cookie.json contents.",
             "value": "[...]"
+        },
+        "threshold": {
+            "description": "Automatically leaves the meet when the meet strength becomes less then threshold strength.",
+            "value": "10"
         }
     },
     "buildpacks": [
