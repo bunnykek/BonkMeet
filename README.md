@@ -1,7 +1,11 @@
 ![BonkMeet](https://github.com/bunnykek/BonkMeet/blob/main/logoM.svg)
 # BonkMeet
 Telegram bot to attend Google Meet sessions on behalf of you :D    
-
+## Features
+- Joins GMeet from Telegram.
+- Toggle chatbox and send message to the chatbox directly from telegram.
+- Automatically leaves the meet when the meet strength becomes less than the assigned threshold strength.
+- Shows the current status(screenshot) of the ongoing meet.
 ## How to use?
 You will need these 3 tokens:
 1. Bot Token from [BotFather](https://telegram.me/BotFather)
