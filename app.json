@@ -26,7 +26,7 @@
             "value": "[...]"
         },
         "threshold": {
-            "description": "Automatically leaves the meet when the meet strength becomes less then threshold strength.",
+            "description": "Automatically leaves the meet when the meet strength becomes less then threshold strength. Use -1 to disable auto leave",
             "value": "10"
         }
     },
