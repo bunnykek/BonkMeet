@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const TelegramBot = require('node-telegram-bot-api');
 var fs = require('fs');
+require('dotenv').config()
 
 const logo =
   `\n
@@ -42,6 +43,11 @@ async function main() {
       let value = await page.evaluate(el => el.textContent, element)
       if (parseInt(value) < threshold) {
         await bot.sendMessage(user_id, 'Meet strength has become less than the threshold strength.');
+
+        await page.screenshot({ path: 'example.png' });
+        let stream = await fs.createReadStream('./example.png');
+        bot.sendPhoto(user_id, stream);
+
         await bot.sendMessage(user_id, 'Leaving the meet...');
         let xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[2]/div/div[7]/span/button'
         await page.waitForTimeout(1000)
@@ -49,6 +55,7 @@ async function main() {
         if (elements.length != 0) {
           await elements[0].click()
           console.log('meet left');
+
           await page.waitForTimeout(2000)
           await page.screenshot({ path: 'example.png' });
           let stream = await fs.createReadStream('./example.png');
@@ -58,7 +65,7 @@ async function main() {
     } catch {
       return null;
     }
-  },60000)
+  },120000)
 
   // Create a bot that uses 'polling' to fetch new updates
   const bot = new TelegramBot(token, { polling: true });
@@ -108,11 +115,19 @@ async function main() {
       elements = await page.$x(xpath)
       await elements[0].click()
 
+    //dismiss button
+    xpath = '//*[@id="yDmH0d"]/div[3]/div[2]/div/div[2]/button'
+    await page.waitForXPath(xpath)
+    elements = await page.$x(xpath)
+    await elements[0].click()
+
       xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/span/span'
       await page.waitForXPath(xpath)
       await page.waitForTimeout(1000)
       elements = await page.$x(xpath)
       await elements[0].click()
+
+
       await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
@@ -147,7 +162,7 @@ async function main() {
       await elements[0].click()
 
       //await page.keyboard.press('Enter');
-      await page.waitForTimeout(1000);
+      //await page.waitForTimeout(1000);
       await page.screenshot({ path: 'example.png' });
       let stream = await fs.createReadStream('./example.png');
       bot.sendPhoto(chatId, stream);
