@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/bunnykek/BonkMeet#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "node-telegram-bot-api": "^0.56.0",
     "puppeteer": "^13.5.1"
   }
