@@ -27,8 +27,11 @@ async function main() {
   const browser = await puppeteer.launch({
     headless: true,
     ignoreDefaultArgs: ['--enable-automation'],
-    args: ['--start-maximized','--no-sandbox', '--disable-setuid-sandbox', '--use-fake-ui-for-media-stream']
+    args: ['--start-maximized','--no-sandbox', '--disable-setuid-sandbox']
   });
+
+  const context = browser.defaultBrowserContext();
+  await context.overridePermissions('https://meet.google.com/', []);
 
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
@@ -47,7 +50,7 @@ async function main() {
         await page.screenshot({ path: 'example.png' });
         let stream = await fs.createReadStream('./example.png');
         bot.sendPhoto(user_id, stream);
-
+        
         await bot.sendMessage(user_id, 'Leaving the meet...');
         let xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[2]/div/div[7]/span/button'
         await page.waitForTimeout(1000)
@@ -55,7 +58,6 @@ async function main() {
         if (elements.length != 0) {
           await elements[0].click()
           console.log('meet left');
-
           await page.waitForTimeout(2000)
           await page.screenshot({ path: 'example.png' });
           let stream = await fs.createReadStream('./example.png');
@@ -65,7 +67,7 @@ async function main() {
     } catch {
       return null;
     }
-  },120000)
+  },60000)
 
   // Create a bot that uses 'polling' to fetch new updates
   const bot = new TelegramBot(token, { polling: true });
@@ -104,34 +106,38 @@ async function main() {
     }
 
     else {
-      xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[1]/div[1]/div/div[4]/div[1]/div/div/div'
-      await page.waitForXPath(xpath)
+      
+      //dismiss button 1
+      try{
+        xpath = '//*[@id="yDmH0d"]/div[3]/div[2]/div/div[2]/button'
+        await page.waitForTimeout(3000)
+        await page.keyboard.press('Enter')
+      } catch {}
+
       await page.waitForTimeout(3000)
-      elements = await page.$x(xpath)
-      await elements[0].click()
-  
-      xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[1]/div[1]/div/div[4]/div[2]/div/div'
-      await page.waitForXPath(xpath)
-      elements = await page.$x(xpath)
-      await elements[0].click()
 
-    //dismiss button
-    xpath = '//*[@id="yDmH0d"]/div[3]/div[2]/div/div[2]/button'
-    await page.waitForXPath(xpath)
-    elements = await page.$x(xpath)
-    await elements[0].click()
+      //dismiss button 2
+      try{
+        xpath = '//*[@id="yDmH0d"]/div[3]/div[2]/div/div[2]/button'
+        await page.waitForTimeout(2000)
+        await page.keyboard.press('Enter')
+      } catch {}
+      
+      console.log("2nd dismiss button clicked")
 
-      xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/span/span'
+      //Join button
+      xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div[1]/div[3]/div/div/div[2]/div/div[2]/div/div[1]/div/button'
       await page.waitForXPath(xpath)
       await page.waitForTimeout(1000)
       elements = await page.$x(xpath)
       await elements[0].click()
 
+      console.log("Join button clicked")
 
+
+      await page.keyboard.press('Tab', {delay: 5000})
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+
       await page.waitForTimeout(5000)
       await page.screenshot({ path: 'example.png' });
       let stream = await fs.createReadStream('./example.png');
@@ -162,7 +168,7 @@ async function main() {
       await elements[0].click()
 
       //await page.keyboard.press('Enter');
-      //await page.waitForTimeout(1000);
+      await page.waitForTimeout(1000);
       await page.screenshot({ path: 'example.png' });
       let stream = await fs.createReadStream('./example.png');
       bot.sendPhoto(chatId, stream);
