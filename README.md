@@ -3,7 +3,7 @@
 Telegram bot to attend Google Meet sessions on behalf of you :D    
 ## Features
 - Joins GMeet from Telegram.
-- Toggle chatbox and send message to the chatbox directly from telegram.
+- Sends notification when the chatbox is being spammed (>15 messages/min)
 - Automatically leaves the meet when the meet strength becomes less than the assigned threshold strength.
 - Shows the current status(screenshot) of the ongoing meet.
 ## How to use?
@@ -35,7 +35,6 @@ Watch the video tutorial : https://www.youtube.com/watch?v=3C8BoCTkJQ0
 ### Bot commands:
 ```
 /join {gmeet_link}
-/chatbox (toggle chatbox)
 /message {test message} (sends message to chatbox)
 /status (shows the ongoing meet current status)
 /leave (leaves the current gmeet session)
