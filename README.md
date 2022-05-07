@@ -6,6 +6,8 @@ Telegram bot to attend Google Meet sessions on behalf of you :D
 - Sends notification when the chatbox is being spammed (>15 messages/min)
 - Automatically leaves the meet when the meet strength becomes less than the assigned threshold strength.
 - Shows the current status(screenshot) of the ongoing meet.
+- Send the message to the chatbox directly from telegram.
+
 ## How to use?
 You will need these 3 tokens:
 1. Bot Token from [BotFather](https://telegram.me/BotFather)
