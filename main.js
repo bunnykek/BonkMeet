@@ -73,9 +73,9 @@ async function main() {
         bot.sendPhoto(user_id, stream);
 
         await bot.sendMessage(user_id, 'Leaving the meet...');
-        let xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[2]/div/div[7]/span/button'
+        let _class = '.VfPpkd-Bz112c-LgbsSe.yHy1rc.eT1oJ.tWDL4c.jh0Tpd.Gt6sbf.QQrMi'
         await page.waitForTimeout(1000)
-        let elements = await page.$x(xpath)
+        let elements = await page.$$(_class)
         if (elements.length != 0) {
           await elements[0].click()
           console.log('meet left');
@@ -131,12 +131,12 @@ async function main() {
 
       //dismiss button 1
       try {
-        xpath = '//*[@id="yDmH0d"]/div[3]/div[2]/div/div[2]/button'
-        await page.waitForTimeout(3000)
+        let _class = '.VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.ksBjEc.lKxP2d.qfvgSe.AjXHhf'
+        await page.waitForTimeout(2000)
         await page.keyboard.press('Enter')
       } catch { }
 
-      await page.waitForTimeout(3000)
+      await page.waitForTimeout(1500)
 
       //dismiss button 2
       try {
@@ -148,11 +148,10 @@ async function main() {
       console.log("2nd dismiss button clicked")
 
       //Join button
-      //xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[10]/div[3]/div/div[1]/div[3]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/button'
-      //await page.waitForXPath(xpath)
-      await page.waitForSelector(".VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc.qfvgSe.jEvJdc.QJgqC")
+      let _class = '.VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc.qfvgSe.jEvJdc.QJgqC'
+      await page.waitForSelector(_class)
       await page.waitForTimeout(1000)
-      elements = await page.$$(".VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc.qfvgSe.jEvJdc.QJgqC")
+      elements = await page.$$(_class)
       await elements[0].click()
 
       console.log("Join button clicked")
@@ -161,18 +160,18 @@ async function main() {
       await page.keyboard.press('Tab', { delay: 5000 })
       await page.keyboard.press('Tab')
 
-      await page.waitForTimeout(5000)
+      await page.waitForTimeout(1000)
       await page.screenshot({ path: 'example.png' });
       let stream = await fs.createReadStream('./example.png');
       bot.sendMessage(chatId, 'Requested/joined the class!', { reply_to_message_id: msg.message_id })
       bot.sendPhoto(chatId, stream);
 
       //toggle chatbox
-      xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[3]/div[3]/div/div/div[3]/span/button'
+      _class = '.VfPpkd-Bz112c-LgbsSe.yHy1rc.eT1oJ.JsuyRc.boDUxc'
       await page.waitForTimeout(1000)
-      elements = await page.$x(xpath)
+      elements = await page.$$(_class)
       if (elements.length != 0) {
-        await elements[0].click()
+        await elements[2].click()
         await page.waitForTimeout(1000)
       }
 
@@ -196,9 +195,9 @@ async function main() {
       await page.keyboard.press('Backspace');
       await page.type("#bfTqV", resp, { delay: 300 });
 
-      xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div[2]/div[2]/div/div[5]/span/button';
-      await page.waitForXPath(xpath)
-      elements = await page.$x(xpath)
+      _class = '.VfPpkd-Bz112c-LgbsSe.yHy1rc.eT1oJ.QDwDD.tWDL4c.Cs0vCd';
+      await page.waitForSelector(_class)
+      elements = await page.$$(_class)
       await elements[0].click()
 
       //await page.keyboard.press('Enter');
@@ -225,9 +224,10 @@ async function main() {
     }
     else if (msg.text == '\/leave') {
       console.log(msg.text);
-      let xpath = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[2]/div/div[7]/span/button'
+      //leave button
+      let _class = '.VfPpkd-Bz112c-LgbsSe.yHy1rc.eT1oJ.tWDL4c.jh0Tpd.Gt6sbf.QQrMi'
       await page.waitForTimeout(1000)
-      let elements = await page.$x(xpath)
+      let elements = await page.$$(_class)
       if (elements.length != 0) {
         await elements[0].click()
         console.log('meet left');
