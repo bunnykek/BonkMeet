@@ -148,10 +148,11 @@ async function main() {
       console.log("2nd dismiss button clicked")
 
       //Join button
-      xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div[1]/div[3]/div/div/div[2]/div/div[2]/div/div[1]/div/button'
-      await page.waitForXPath(xpath)
+      //xpath = '//*[@id="yDmH0d"]/c-wiz/div/div/div[10]/div[3]/div/div[1]/div[3]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/button'
+      //await page.waitForXPath(xpath)
+      await page.waitForSelector(".VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc.qfvgSe.jEvJdc.QJgqC")
       await page.waitForTimeout(1000)
-      elements = await page.$x(xpath)
+      elements = await page.$$(".VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc.qfvgSe.jEvJdc.QJgqC")
       await elements[0].click()
 
       console.log("Join button clicked")
