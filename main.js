@@ -1,7 +1,6 @@
 const puppeteer = require('puppeteer');
 const TelegramBot = require('node-telegram-bot-api');
 var fs = require('fs');
-const { type } = require('os');
 require('dotenv').config()
 
 const logo =
@@ -148,7 +147,7 @@ async function main() {
       console.log("2nd dismiss button clicked")
 
       //Join button
-      let _class = '.VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc.qfvgSe.jEvJdc.QJgqC'
+      let _class = '#yDmH0d > c-wiz > div > div > div:nth-child(10) > div.crqnQb > div > div.gAGjv > div.vgJExf > div > div > div.d7iDfe.NONs6c > div > div.Sla0Yd > div > div.XCoPyb > div:nth-child(1) > button'
       await page.waitForSelector(_class)
       await page.waitForTimeout(1000)
       elements = await page.$$(_class)
@@ -159,6 +158,9 @@ async function main() {
 
       await page.keyboard.press('Tab', { delay: 5000 })
       await page.keyboard.press('Tab')
+      // await page.keyboard.press('Tab')
+      // await page.keyboard.press('Tab')
+      // await page.keyboard.press('Tab')
 
       await page.waitForTimeout(1000)
       await page.screenshot({ path: 'example.png' });
