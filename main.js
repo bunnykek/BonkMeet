@@ -251,7 +251,10 @@ async function main() {
 /message {test message} (sends message to chatbox)
 /status (shows the ongoing meet current status)
 /leave (leaves the current gmeet session)
-/help`
+/help
+
+bonkMeet by @pseudoboi🧪
+`
       bot.sendMessage(chatId, help, { reply_to_message_id: msg.message_id })
     }
 
