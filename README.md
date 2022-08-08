@@ -20,7 +20,7 @@ First install node.js and set these two environment variables:
 bot_token="XXXXXXX:AAAAAAAAAAAAAAAAAAAAAAAa"  //bot token from botfather
 cookie =                                      //exported cookie
 user_id =                                     //Get your userID from https://telegram.me/userinfobot
-threshold = 10                                //Auto leaves the meet when the meet strength becomes less then threshold
+threshold = 10                                //Auto leaves the meet when the meet strength becomes less than threshold
 ```
 then clone this repo and move into its directory.   
 `npm install`     
