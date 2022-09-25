@@ -147,7 +147,7 @@ async function main() {
       console.log("2nd dismiss button clicked")
 
       //Join button
-      let _class = '#yDmH0d > c-wiz > div > div > div:nth-child(10) > div.crqnQb > div > div.gAGjv > div.vgJExf > div > div > div.d7iDfe.NONs6c > div > div.Sla0Yd > div > div.XCoPyb > div:nth-child(1) > button'
+      let _class = '#yDmH0d > c-wiz > div > div > div:nth-child(11) > div.crqnQb > div > div.gAGjv > div.vgJExf > div > div > div.d7iDfe.NONs6c > div > div.Sla0Yd > div > div.XCoPyb > div > button > div.VfPpkd-RLmnJb'
       await page.waitForSelector(_class)
       await page.waitForTimeout(1000)
       elements = await page.$$(_class)
@@ -164,9 +164,9 @@ async function main() {
 
       await page.waitForTimeout(1000)
       await page.screenshot({ path: 'example.png' });
-      let stream = await fs.createReadStream('./example.png');
+      // let stream = await fs.createReadStream('./example.png');
       bot.sendMessage(chatId, 'Requested/joined the class!', { reply_to_message_id: msg.message_id })
-      bot.sendPhoto(chatId, stream);
+      bot.sendPhoto(chatId, 'example.png');
 
       //toggle chatbox
       _class = '.VfPpkd-Bz112c-LgbsSe.yHy1rc.eT1oJ.JsuyRc.boDUxc'
