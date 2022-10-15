@@ -15,7 +15,7 @@ You will need these 3 tokens:
 3. Go to meet.google.com and export the cookie using [Cookies for puppeteer chrome extension](https://chrome.google.com/webstore/detail/%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BCjson%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%87%BA%E5%8A%9B-for-puppet/nmckokihipjgplolmcmjakknndddifde)    
 
 ### For VPS/RDP users:   
-First install node.js and set these two environment variables:
+First install node.js and set these 4 environment variables:
 ```
 bot_token="XXXXXXX:AAAAAAAAAAAAAAAAAAAAAAAa"  //bot token from botfather
 cookie =                                      //exported cookie
