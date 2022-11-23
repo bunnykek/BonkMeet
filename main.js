@@ -147,7 +147,7 @@ async function main() {
       console.log("2nd dismiss button clicked")
 
       //Join button
-      let _class = '#yDmH0d > c-wiz > div > div > div:nth-child(11) > div.crqnQb > div > div.gAGjv > div.vgJExf > div > div > div.d7iDfe.NONs6c > div > div.Sla0Yd > div > div.XCoPyb > div > button > div.VfPpkd-RLmnJb'
+      let _class = '#yDmH0d > c-wiz > div > div > div:nth-child(13) > div.crqnQb > div > div.gAGjv > div.vgJExf > div > div > div.d7iDfe.NONs6c > div > div.Sla0Yd > div > div.XCoPyb > div > button'
       await page.waitForSelector(_class)
       await page.waitForTimeout(1000)
       elements = await page.$$(_class)
